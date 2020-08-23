@@ -1,0 +1,33 @@
+name: Okapi CI
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  pull_request:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install deps
+      run: lein deps
+    - name: Run tests
+      run: lein test
+    - name: Notify slack success
+      if: success()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: testing
+        status: SUCCESS
+        color: good
+    - name: Notify slack fail
+      if: failure()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: testing
+        status: FAILED
+        color: danger
