@@ -19,4 +19,4 @@ monthly_ach double, monthly_cc double)"])
   (3, 50, 'male', 25000, 130.5, 140.6),
   (4, 50, 'female', 5000, 123,140)"])
 
- (j/query db ["select * from gl"])
+ ;(j/query db ["select * from gl"])
