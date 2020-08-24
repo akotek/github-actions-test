@@ -9,11 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install deps
-      run: lein deps
     - name: Run tests
       run: lein test
-    - name: Notify slack success
+    - name: Notify success
       if: success()
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
@@ -22,7 +20,7 @@ jobs:
         channel: tests
         status: SUCCESS
         color: good
-    - name: Notify slack fail
+    - name: Notify failure
       if: failure()
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
