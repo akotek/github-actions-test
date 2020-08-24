@@ -15,7 +15,7 @@ jobs:
       if: always()
       with:
         status: ${{ job.status }}
-        fields: repo,commit,author,eventName,took
+        fields: repo,commit,author,eventName
       env:
         GITHUB_TOKEN: ${{ github.token }}
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
