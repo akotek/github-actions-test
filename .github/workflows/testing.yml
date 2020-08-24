@@ -18,6 +18,7 @@ jobs:
           ${{ runner.os }}-maven-
     - name: Run tests
       run: lein test
+    - name: Notify slack
     - uses: 8398a7/action-slack@v3
       if: always()
       with:
