@@ -5,5 +5,6 @@
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [org.clojure/java.jdbc "0.7.11"]
-                 [mysql/mysql-connector-java  "8.0.18"]]
+                 [mysql/mysql-connector-java  "8.0.18"]
+                 [com.h2database/h2 "1.3.148"]]
   :repl-options {:init-ns github-actions-test.core})
