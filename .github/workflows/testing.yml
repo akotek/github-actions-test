@@ -14,9 +14,9 @@ jobs:
     - uses: 8398a7/action-slack@v3
       if: always()
       with:
-        text: "Title: ${{ github.event.pull_request.title }}"
+        text: "PR Title: ${{ github.event.pull_request.title }}"
         status: ${{ job.status }}
-        fields: repo,commit,author,took)
+        fields: repo,commit,author,took
       env:
         GITHUB_TOKEN: ${{ github.token }}
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
