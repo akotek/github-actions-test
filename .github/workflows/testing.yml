@@ -11,54 +11,11 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run tests
       run: lein test
-    - name: Notify success
-      if: success()
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      uses: abinoda/slack-action@master
+    - uses: 8398a7/action-slack@v3
       with:
-        args: '{
-	"attachments": [
-		{
-			"channel": "C019Q6H2WC9",
-			"color": "#f2c744",
-			"blocks": [
-				{
-					"type": "section",
-					"text": {
-						"type": "mrkdwn",
-						"text": "*Pull Request:* ${{ github.event.pull_request.title }}"
-					}
-				},
-				{
-					"type": "section",
-					"text": {
-						"type": "mrkdwn",
-						"text": "*Who?:*${{ github.event.pull_request.user.login }}"
-					}
-				},
-				{
-					"type": "section",
-					"text": {
-						"type": "mrkdwn",
-						"text": "*Status:* FAILED"
-					}
-				},
-				{
-					"type": "section",
-					"text": {
-						"type": "mrkdwn",
-						"text": "<${{ github.event.pull_request._links.html.href }}|View Pull Request>"
-					}
-				}
-			]
-		}
-	]
-}'
-    - name: Notify failure
-      if: failure()
+        status: ${{ job.status }}
+        fields: repo,message,commit,author,action,eventName,workflow,took)
       env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      uses: abinoda/slack-action@master
-      with:
-        args: '{\"channel\":\"C019Q6H2WC9\",\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Pull Request:* ${{ github.event.pull_request.title }}\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Who?:* ${{ github.event.pull_request.user.login }}\n*Status:* "FAILED"\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"<${{ github.event.pull_request.html_url }}|View Pull Request>\"}}]}'
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      if: always()
+      
