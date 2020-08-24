@@ -14,7 +14,7 @@ jobs:
     - uses: 8398a7/action-slack@v3
       if: always()
       with:
-        text: "PR Title: ${{ github.event.pull_request.title }}"
+        text: "PR Title: ${{ github.event.pull_request.message }}\n status: ${{ job.status }}"
         status: ${{ job.status }}
         fields: repo,commit,author,took
       env:
