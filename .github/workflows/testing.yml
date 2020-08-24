@@ -12,10 +12,10 @@ jobs:
     - name: Run tests
       run: lein test
     - uses: 8398a7/action-slack@v3
+      if: always()
       with:
         status: ${{ job.status }}
         fields: repo,message,commit,author,action,eventName,workflow,took)
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      if: always()
       
