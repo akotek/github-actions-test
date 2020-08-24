@@ -14,7 +14,7 @@ jobs:
     - uses: 8398a7/action-slack@v3
       if: always()
       with:
-        text: "####### *${{ job.status }}.toUpperCase()* ####### in PR: ${{ github.event.pull_request.title }}*"
+        text: "####### *${{ job.status }}* ####### \n *in PR: ${{ github.event.pull_request.title }}*"
         status: ${{ job.status }}
         fields: repo,commit,author,took
       env:
